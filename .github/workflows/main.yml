@@ -21,7 +21,7 @@ jobs:
       with:
         credentials_json: '${{ secrets.KEY_JSON }}'
 
-    - id: 'Deploy to app engine'
+    - name: 'Deploy to App Engine'
       uses: 'google-github-actions/deploy-appengine@v0'
       with:
         deliverables: 'app.yaml'
