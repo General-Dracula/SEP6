@@ -6,9 +6,9 @@ on:
       - master
 
 jobs:
-  test_job:
-    runs-on: ubuntu-latest
+  hello_world_job:
+    run-on: ubuntu-latest
     steps:
-      - name: Test Job
+      - name: Say hello
         run: |
           echo "Hello World"
