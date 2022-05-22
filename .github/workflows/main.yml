@@ -22,4 +22,4 @@ jobs:
       with:
         deliverables: 'app.yaml'
         promote: true
-        version: 'Last build'
+        version: 'LastBuild'
