@@ -11,13 +11,15 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: 'Setup Cloud SDK'
-      uses: 'google-github-actions/setup-gcloud@v0'
+    - uses: actions/checkout@v3
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v0'
       with:
-        project_id: '${{ env.PROJECT_ID }}'
-        service_account_key: '${{ secrets.KEY_JSON }}'
+        credentials_json: '${{ secrets.KEY_JSON }}'
 
     - name: 'Deploy to App Engine'
-      run: 'gcloud app deploy --project sep6-350115'
-
-    
+      uses: 'google-github-actions/deploy-appengine@v0'
+      with:
+        deliverables: 'app.yaml'
+        promote: false
+        version: 'v1'
