@@ -22,4 +22,4 @@ jobs:
       with:
         deliverables: 'app.yaml'
         promote: true
-        version: ${{ github.event.head_commit.message }}
+        version: ${{ github.event.head_commit.message }} #no space stuff
