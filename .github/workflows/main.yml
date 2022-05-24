@@ -16,12 +16,14 @@ jobs:
         with:
           node-version: '16'
 
-      - name: navigate to frontend directory
-        run: cd frontend/
-      - name: npm install
-        run: npm install
-      - name: build
-        run: npm build
+      - name: install frontend dependencies
+        run: |
+          cd frontend/
+          npm install
+      - name: build frontend code
+        run: |
+          cd frontend/
+          npm run build
 
       - id: 'auth'
         uses: 'google-github-actions/auth@v0'
