@@ -4,22 +4,33 @@ on:
   push:
     branches:
       - main
-  
+
 jobs:
   deploy:
     name: Deploy to App Engine
     runs-on: ubuntu-latest
-    
-    steps:
-    - uses: actions/checkout@v3
-    - id: 'auth'
-      uses: 'google-github-actions/auth@v0'
-      with:
-        credentials_json: '${{ secrets.KEY_JSON }}'
 
-    - name: 'Deploy to App Engine'
-      uses: 'google-github-actions/deploy-appengine@v0'
-      with:
-        deliverables: 'app.yaml'
-        promote: true
-        version: 'lastbuild'
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: navigate to frontend directory
+        run: cd frontend/
+      - name: npm install
+        run: npm install
+      - name: build
+        run: npm build
+
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ secrets.KEY_JSON }}'
+
+      - name: 'Deploy to App Engine'
+        uses: 'google-github-actions/deploy-appengine@v0'
+        with:
+          deliverables: 'app.yaml'
+          promote: true
+          version: 'lastbuild'

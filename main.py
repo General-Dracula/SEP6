@@ -1,7 +1,7 @@
 from pickle import FALSE, TRUE
-from flask import Flask
+from flask import Flask, send_from_directory
 
-import mysql.connector   #pip3 install mysql-connector-python    
+import mysql.connector   #pip3 instal   l mysql-connector-python    
 import random            #random generator
 import string 
 import hashlib           #sha256 hashing
@@ -44,7 +44,7 @@ def get_user_id(email): #to be continued
       return 
               
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='', static_folder='frontend/build')
 
 @app.route("/")
 def main_app():
@@ -57,7 +57,7 @@ def main_app():
   else: 
     print("------False password or not made")
     
-  return "<p>Hello World This time it should add users to the dbs</p>"
+  return send_from_directory(app.static_folder, 'index.html')
 
 if __name__ == '__main__':
   app.run(host='127.0.0.1', port=8080, debug=True)
