@@ -17,3 +17,7 @@
 __pycache__/
 # Ignored by the build system
 /setup.cfg
+# Frontend source code should be ignored to make deployment faster
+frontend/node_modules/
+frontend/public/
+frontend/src/
