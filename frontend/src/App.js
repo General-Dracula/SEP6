@@ -10,13 +10,13 @@ const App = () => {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      const url = `http://www.omdbapi.com/?s=${filteredMovie}&apikey=263d22d8`
+      const url = `https://api.themoviedb.org/3/search/movie?api_key=c84dee412f07183fc9e3cc93b8e1b7f5&language=en-US&include_adult=false&query=${filteredMovie}`
 
       const response = await axios.get(url)
-      const movies = await response.data
+      const fetchedMovies = await response.data
 
-      if (movies.Search) {
-        setMovies(movies.Search)
+      if (fetchedMovies.results) {
+        setMovies(fetchedMovies.results)
       }
     }
     fetchMovies()
