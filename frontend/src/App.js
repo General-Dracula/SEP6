@@ -10,7 +10,7 @@ const App = () => {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      const url = `https://www.omdbapi.com/?s=${filteredMovie}&apikey=263d22d8`
+      const url = `http://www.omdbapi.com/?s=${filteredMovie}&apikey=263d22d8`
 
       const response = await axios.get(url)
       const movies = await response.data
