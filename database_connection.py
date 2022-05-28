@@ -1,4 +1,4 @@
-import mysql.connector   #pip3 instal   l mysql-connector-python    
+import mysql.connector   #pip3 install mysql-connector-python    
 import random            #random generator
 import string 
 import hashlib           #sha256 hashing

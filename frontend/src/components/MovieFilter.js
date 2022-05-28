@@ -1,14 +1,23 @@
 import React from 'react'
 
-const MovieFilter = ({ filteredMovie, handleMovieFilterChange }) => {
+const MovieFilter = ({
+  filteredMovie,
+  handleMovieFilter,
+  handleMovieSearch,
+}) => {
   return (
-    <div>
-      <input
-        value={filteredMovie}
-        onChange={handleMovieFilterChange}
-        placeholder="Type to search for a movie"
-      />
-    </div>
+    <header className="bg-teal p-3 rounded">
+      <form onSubmit={handleMovieSearch}>
+        <input
+          value={filteredMovie}
+          onChange={handleMovieFilter}
+          placeholder="Search..."
+          className="rounded-lg text-lg text-black border-emerald-600 border-4 border-solid"
+          type="search"
+          name="filterMovie"
+        />
+      </form>
+    </header>
   )
 }
 

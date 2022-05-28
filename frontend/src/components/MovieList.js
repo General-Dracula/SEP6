@@ -1,21 +1,13 @@
 import React from 'react'
+import Movie from './Movie'
 
 const MovieList = ({ movies }) => {
   return (
-    <>
+    <div className="flex flex-row flex-wrap justify-between">
       {movies.map(movie => {
-        let { id, poster_path } = movie
-
-        return (
-          <div key={id}>
-            <img
-              src={`https://image.tmdb.org/t/p/w200/${poster_path}`}
-              alt="movie"
-            ></img>
-          </div>
-        )
+        return <Movie key={movie.id} {...movie} />
       })}
-    </>
+    </div>
   )
 }
 
