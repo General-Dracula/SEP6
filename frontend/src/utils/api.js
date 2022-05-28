@@ -52,7 +52,7 @@ const getFeaturedMovies = async () => {
   return response.data
 }
 
-export default {
+const api = {
   getConfig,
   getLatestMovies,
   getGenres,
@@ -60,3 +60,5 @@ export default {
   searchByGenre,
   getFeaturedMovies,
 }
+
+export default api
