@@ -5,33 +5,41 @@ import hashlib           #sha256 hashing
 import datetime
 import re
 
+dbs_config = {
+  'host': '34.88.151.208',
+  'port': 3306,
+  'user': 'root',
+  'password': 'MuieLuMuila',
+  'db': 'SEP6-DB',
+}
+
 def random_char(char_num):
        return ''.join(random.choice(string.ascii_letters) for _ in range(char_num))
      
-def add_user(char_email, char_password): #return false if user allready created
+def add_user(char_email, char_password): #return false if user allready created or the email is invalid
       check_data = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
-      if(re.fullmatch(check_data, char_email)):
-            print("Invalid password")
+      if(re.fullmatch(check_data, char_email)): #check email
+            print("Invalid email")
             return False
-      mydb = mysql.connector.connect(host='34.88.151.208',port=3306,user='root',passwd='MuieLuMuila',db='SEP6-DB')
+      mydb = mysql.connector.connect(**dbs_config) #connect to database with the predefined config
       cursor = mydb.cursor()
-      SQL_checkMultipleUsers = "SELECT * FROM Users WHERE Email = %s"
-      cursor.execute(SQL_checkMultipleUsers, (char_email, ))
-      rows = cursor.fetchall()  
-      for row in rows:
-            mydb.close()
-            print('User allready created')
-            return False
-      SQL_add_user = "INSERT INTO Users (Email, Password_Hash) VALUES (%s, %s)"
-      hashed_password = hashlib.sha256(char_password.encode('utf-8')).hexdigest()
-      data_user = (char_email, hashed_password)
-      cursor.execute(SQL_add_user, data_user)
-      mydb.commit()
-      mydb.close()
+      SQL_checkMultipleUsers = "SELECT * FROM Users WHERE Email = %s" #create sql command
+      cursor.execute(SQL_checkMultipleUsers, (char_email, )) #search for any other users with this email
+      rows = cursor.fetchall()  #fetch the return data
+      for row in rows: #if there is a user with the same email return false
+            mydb.close() #close the dbs connection
+            print('User allready created') #print error message
+            return False 
+      SQL_add_user = "INSERT INTO Users (Email, Password_Hash) VALUES (%s, %s)" #create sql query
+      hashed_password = hashlib.sha256(char_password.encode('utf-8')).hexdigest() #hash the password
+      data_user = (char_email, hashed_password) #data for sql query(password and email)
+      cursor.execute(SQL_add_user, data_user) #add the new user to the dbs
+      mydb.commit() #commit the data to the dbs
+      mydb.close() #close the dbs connection
       return
     
 def check_password(email, password): #returns true or false
-      mydb = mysql.connector.connect(host='34.88.151.208',port=3306,user='root',passwd='MuieLuMuila',db='SEP6-DB')
+      mydb = mysql.connector.connect(**dbs_config)
       cursor = mydb.cursor()
       SQL_getUserData = "SELECT * FROM Users WHERE Email = %s AND Password_Hash = %s"
       cursor.execute(SQL_getUserData, (email, hashlib.sha256(password.encode('utf-8')).hexdigest()))
@@ -43,7 +51,7 @@ def check_password(email, password): #returns true or false
       return False
 
 def delete_user(email): #deletes both user and his favorite movies
-      mydb = mysql.connector.connect(host='34.88.151.208',port=3306,user='root',passwd='MuieLuMuila',db='SEP6-DB')
+      mydb = mysql.connector.connect(**dbs_config)
       cursor = mydb.cursor()
       user_id = get_user_id(email)
       SQL_deleteFavMov = "DELETE FROM FavoriteMovies WHERE UserId = %s"
@@ -55,7 +63,7 @@ def delete_user(email): #deletes both user and his favorite movies
       return
 
 def get_user_id(email): #gives the user id as an int for the given email
-      mydb = mysql.connector.connect(host='34.88.151.208',port=3306,user='root',passwd='MuieLuMuila',db='SEP6-DB')
+      mydb = mysql.connector.connect(**dbs_config)
       cursor = mydb.cursor()
       SQL_getUserData = "SELECT id FROM Users WHERE Email = %s"
       cursor.execute(SQL_getUserData, (email, ))
@@ -66,7 +74,7 @@ def get_user_id(email): #gives the user id as an int for the given email
       return -1
 
 def delete_favorite_movie(movie_id, user_email): #deletes favorite movie
-      mydb = mysql.connector.connect(host='34.88.151.208',port=3306,user='root',passwd='MuieLuMuila',db='SEP6-DB')
+      mydb = mysql.connector.connect(**dbs_config)
       cursor = mydb.cursor()
       SQL_checkMultipleUsers = "SELECT * FROM Users WHERE Email = %s"
       cursor.execute(SQL_checkMultipleUsers, (user_email, ))
@@ -88,7 +96,7 @@ def delete_favorite_movie(movie_id, user_email): #deletes favorite movie
       
 
 def add_favorite_movie(movie_id, user_email): #returns false if movie allready added or user not existing
-      mydb = mysql.connector.connect(host='34.88.151.208',port=3306,user='root',passwd='MuieLuMuila',db='SEP6-DB')
+      mydb = mysql.connector.connect(**dbs_config)
       cursor = mydb.cursor()
       SQL_checkMultipleUsers = "SELECT * FROM Users WHERE Email = %s"
       cursor.execute(SQL_checkMultipleUsers, (user_email, ))
@@ -117,7 +125,7 @@ def add_favorite_movie(movie_id, user_email): #returns false if movie allready a
       return
       
 def get_favorite_movies(user_email): #gives a vector of the id of the favorite movies of a user 
-      mydb = mysql.connector.connect(host='34.88.151.208',port=3306,user='root',passwd='MuieLuMuila',db='SEP6-DB')
+      mydb = mysql.connector.connect(**dbs_config)
       cursor = mydb.cursor()
       SQL_checkMultipleUsers = "SELECT MovieId FROM FavoriteMovies WHERE UserId = %s"
       cursor.execute(SQL_checkMultipleUsers, (get_user_id(user_email), ))
@@ -129,7 +137,7 @@ def get_favorite_movies(user_email): #gives a vector of the id of the favorite m
       return return_list
 
 def user_visitted_page(): #adds a record to the dbs of a user logging in and deleted logs older than 26 hours
-      mydb = mysql.connector.connect(host='34.88.151.208',port=3306,user='root',passwd='MuieLuMuila',db='SEP6-DB')
+      mydb = mysql.connector.connect(**dbs_config)
       cursor = mydb.cursor()
       now = datetime.datetime.now()
       SQL_user_logged_in = "INSERT INTO UserLogged (date) VALUES (%s)"
@@ -141,7 +149,7 @@ def user_visitted_page(): #adds a record to the dbs of a user logging in and del
       return
 
 def get_visit_numbers_last_24hr(): #does what it sounds like, should subtract current one
-      mydb = mysql.connector.connect(host='34.88.151.208',port=3306,user='root',passwd='MuieLuMuila',db='SEP6-DB')
+      mydb = mysql.connector.connect(**dbs_config)
       cursor = mydb.cursor()
       SQL_Users_last_24h = "SELECT * FROM UserLogged WHERE UserLogged.date > DATE_SUB(NOW(), INTERVAL 24 HOUR)"
       cursor.execute(SQL_Users_last_24h, ())
