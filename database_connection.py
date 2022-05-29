@@ -3,11 +3,16 @@ import random            #random generator
 import string 
 import hashlib           #sha256 hashing
 import datetime
+import re
 
 def random_char(char_num):
        return ''.join(random.choice(string.ascii_letters) for _ in range(char_num))
      
 def add_user(char_email, char_password): #return false if user allready created
+      check_data = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+      if(re.fullmatch(check_data, char_email)):
+            print("Invalid password")
+            return False
       mydb = mysql.connector.connect(host='34.88.151.208',port=3306,user='root',passwd='MuieLuMuila',db='SEP6-DB')
       cursor = mydb.cursor()
       SQL_checkMultipleUsers = "SELECT * FROM Users WHERE Email = %s"
