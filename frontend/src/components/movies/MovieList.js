@@ -1,7 +1,7 @@
 import React from 'react'
 import MovieListItem from './MovieListItem'
 import { Link } from 'react-router-dom'
-import { Box, Flex } from '@chakra-ui/react'
+import { Flex } from '@chakra-ui/react'
 
 const MovieList = ({ movies }) => {
   return (
