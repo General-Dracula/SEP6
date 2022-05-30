@@ -18,7 +18,7 @@ def random_char(char_num):
      
 def add_user(char_email, char_password): #return false if user allready created or the email is invalid
       check_data = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
-      if(re.fullmatch(check_data, char_email)): #check email
+      if(re.search(check_data, char_email)): #check email
             print("Invalid email")
             return False
       mydb = mysql.connector.connect(**dbs_config) #connect to database with the predefined config
