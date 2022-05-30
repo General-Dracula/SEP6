@@ -1,6 +1,8 @@
 import React from 'react'
 import { useSearch } from '../context/SearchProvider'
 import api from '../../utils/movieApi'
+import { Input } from '@chakra-ui/react'
+import { colors } from '../../utils/constants'
 
 const MovieFilter = () => {
   
@@ -34,12 +36,23 @@ const MovieFilter = () => {
   return (
     <header>
       <form onSubmit={handleMovieSearch}>
-        <input
+        <Input
           value={filteredMovie}
           onChange={handleMovieFilter}
           placeholder="Search..."
           type="search"
           name="filterMovie"
+
+          bgColor={colors.card}
+          color={colors.text}
+          border='none'
+          borderRadius='0.5rem'
+          h='2rem'
+          maxW='20rem'
+          w='20rem'
+          px='1rem'
+          py='0.5rem'
+          overflow='hidden'
         />
       </form>
     </header>

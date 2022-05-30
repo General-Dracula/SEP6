@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import { Box, Flex, Heading, Image, Text } from '@chakra-ui/react'
 import MovieDetailItem from './MovieDetailItem'
 import ActorCard from './ActorCard'
+import { colors } from '../../utils/constants'
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState({})
@@ -80,7 +81,7 @@ const MovieDetails = () => {
         {movie.overview}
       </Text>
       <Box
-        bgColor='gray'
+        bgColor={colors.details}
         pb='0.5rem'
       >
         {
@@ -96,10 +97,6 @@ const MovieDetails = () => {
         
       </Flex>
     </Flex>
-    <Flex
-      justifyContent='center'
-    >
-
       <Flex 
         flexWrap='wrap'
         gridGap='1rem'
@@ -108,7 +105,6 @@ const MovieDetails = () => {
           <ActorCard key={member.id} actor={member}/>
         ))}
       </Flex>
-    </Flex>
     </Flex>
   )
 }

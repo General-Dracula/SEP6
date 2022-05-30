@@ -31,6 +31,7 @@ const Navigation = () => {
             w='100%'
             alignItems='center'
             justifyContent='space-between'
+            flexWrap='wrap'
           >
             <Flex
               ml='2rem'
@@ -49,6 +50,7 @@ const Navigation = () => {
             <Flex
               gridGap='2rem'
               mr='2rem'
+              alignItems='center'
             >
               <MovieFilter />
               <NavItem 

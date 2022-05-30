@@ -1,9 +1,20 @@
 import { Flex, Heading, Image, Text, Box } from '@chakra-ui/react'
-import React from 'react'
+import React, {useState} from 'react'
 import { colors } from '../../utils/constants'
 import { trimDate } from '../../utils/helpers'
 
 const Movie = ({ poster_path, title, vote_average, release_date }) => {
+  
+  const [isHovered, setIsHovered] = useState(false)
+
+  const handleMouseEnter = () => setIsHovered(true)
+  const handleMouseLeave = () => setIsHovered(false)
+
+  const onFavoriteClick = (event) => {
+    event.preventDefault()
+    // functionality for adding a movie to favorite
+  }
+
   const setVoteColor = () => {
     if (vote_average >= 8) {
       return 'green'
@@ -14,21 +25,47 @@ const Movie = ({ poster_path, title, vote_average, release_date }) => {
     }
   }
 
-
+  console.log(isHovered)
   return (
     <Flex
       flexDir='column'
       w='13rem'
       overflow='hidden'
       gridGap='0.5rem'
-      
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      pos='relative'
     >
+
+      {isHovered && <Box 
+        bgColor={colors.card}
+        pos='absolute'
+        zIndex='100'
+        top='1rem'
+        left='1rem'
+        p='0.5rem'
+        borderRadius='0.5rem'
+        onClick={onFavoriteClick}
+      >
+        F
+      </Box>}
+
       <Image
         minW='100%'
         borderRadius='1rem'
         src={`https://image.tmdb.org/t/p/w342/${poster_path}`}
-        alt="movie"
-      ></Image>
+        alt={title}
+        transitionDuration='0.3s'
+        {...isHovered ? 
+          {
+            filter: 'auto',
+            blur:'2px'
+          }
+          
+        :
+          {}
+        }
+      />
       <Box
         px='0.5rem'
         pb='0.3rem'

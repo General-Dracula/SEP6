@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import MovieFilter from './MovieFilter'
+import React, { useEffect } from 'react'
 import MovieList from './MovieList'
 import { useSearch } from '../context/SearchProvider'
 import api from '../../utils/movieApi'
 
 const MoviePage = () => {
   const { 
-    // searchText: filteredMovie, 
-    // setSearchText: setFilteredMovie,
     movies,
     setMovies
   } = useSearch()
@@ -21,14 +18,12 @@ const MoviePage = () => {
       }
     }
     discoverMovies().catch(error => console.log(error))
-  }, [])
+  }, [setMovies])
 
   
 
   return (
-    <div>
-      <MovieList movies={movies} />
-    </div>
+    <MovieList movies={movies} />
   )
 }
 

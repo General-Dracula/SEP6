@@ -1,6 +1,8 @@
 export const colors = {
   text: 'white',
-	bg: '#454545',
-	nav: '#494bb3',
-	card: '#000000CC'
+	textInv: 'black',
+	bg: '#1b1c24',
+	nav: '#30344a',
+	card: '#000000CC',
+	details: '#4a4a4a',
 }

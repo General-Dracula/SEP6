@@ -11,6 +11,7 @@ const Layout = ({children}) => {
 			bgColor={colors.bg}
 			px='10%'
 			pt='1rem'
+			pb='3rem'
 			gridGap='2rem'
 			fontFamily='sans-serif'
 			color={colors.text}

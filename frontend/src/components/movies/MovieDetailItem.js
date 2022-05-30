@@ -1,4 +1,4 @@
-import { Box, Divider, Flex, Heading, Text } from "@chakra-ui/react"
+import { Divider, Flex, Heading, Text } from "@chakra-ui/react"
 import { colors } from "../../utils/constants"
 
 const MovieDetailItem = ({detailName, detailValue}) => {
