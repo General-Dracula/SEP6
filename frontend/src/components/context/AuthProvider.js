@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react'
+import React, { useState, createContext, useContext } from 'react'
 
 export const AuthContext = createContext(null)
 
@@ -25,3 +25,8 @@ const AuthProvider = ({ children }) => {
 }
 
 export default AuthProvider
+
+// Helper hook to access auth info easier
+export const useAuth = () => {
+  return useContext(AuthContext)
+} 

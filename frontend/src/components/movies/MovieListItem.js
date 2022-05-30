@@ -18,10 +18,10 @@ const Movie = ({ poster_path, title, vote_average, release_date }) => {
   return (
     <Flex
       flexDir='column'
-      w='7rem'
+      w='13rem'
       overflow='hidden'
       gridGap='0.5rem'
-      mb='1.5rem'
+      
     >
       <Image
         minW='100%'
@@ -35,8 +35,8 @@ const Movie = ({ poster_path, title, vote_average, release_date }) => {
       >
         <Heading
           m='0'
-          as='h5' 
-          size='md'
+          as='h3'
+          color={colors.text}
         >
           {title}
         </Heading>
@@ -49,15 +49,17 @@ const Movie = ({ poster_path, title, vote_average, release_date }) => {
         >
           <Text
             m='0'
-            fontSize='smaller'
+            fontSize='large'
             color={colors.text}
           >
             {trimDate(release_date)}
           </Text>
           <Text
+            w='2rem'
+            textAlign='center'
             m='0'
             color={setVoteColor()}
-            fontSize='smaller'
+            fontSize='large'
             bgColor='white'
             p='0.2rem'
             borderRadius='0.5rem'

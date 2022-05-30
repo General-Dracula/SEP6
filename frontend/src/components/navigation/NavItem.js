@@ -15,7 +15,7 @@ const NavItem = ({to, title, ...props}) => {
 			>
 				<Text
 					m='0'
-					fontSize='smaller'
+					fontSize='large'
 				>
 					{title}
 				</Text>

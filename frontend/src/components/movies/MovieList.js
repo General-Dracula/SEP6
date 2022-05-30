@@ -7,8 +7,9 @@ const MovieList = ({ movies }) => {
   return (
     <Flex
       flexWrap='wrap'
-      justifyContent='center'
-      gridGap='1.5rem'
+      justifyContent='start'
+      gridGap='3rem'
+      mb='3rem'
     >
       {movies.map(movie => {
         return (

@@ -50,6 +50,7 @@ const MovieDetails = () => {
     <Flex 
       flexDir='column'
       gridGap='2rem'
+      mb='3rem'
     >
     <Flex
       // alignItems='start'
@@ -64,17 +65,17 @@ const MovieDetails = () => {
       />
       <Flex
         flexDir='column'
-        w='50%'
+        w='60%'
         // gridGap='4rem'
         justifyContent='center'
       >
       
 
-      <Heading as='h1' size='2xl'>
+      <Heading as='h1' fontSize='3rem'>
         {movie.title}
       </Heading>
       <Text
-        fontSize='smaller'
+        fontSize='large'
       >
         {movie.overview}
       </Text>
@@ -95,6 +96,10 @@ const MovieDetails = () => {
         
       </Flex>
     </Flex>
+    <Flex
+      justifyContent='center'
+    >
+
       <Flex 
         flexWrap='wrap'
         gridGap='1rem'
@@ -103,6 +108,7 @@ const MovieDetails = () => {
           <ActorCard key={member.id} actor={member}/>
         ))}
       </Flex>
+    </Flex>
     </Flex>
   )
 }
