@@ -1,6 +1,6 @@
 import { Box, Flex, Image } from '@chakra-ui/react'
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { colors } from '../../utils/constants'
 import { useAuth } from '../context/AuthProvider'
 import MovieFilter from '../movies/MovieFilter'
@@ -9,6 +9,7 @@ import NavItem from './NavItem'
 const Navigation = () => {
 
   const {user} = useAuth()
+  const location = useLocation()
 
   return (
     <Box
@@ -52,7 +53,7 @@ const Navigation = () => {
               mr='2rem'
               alignItems='center'
             >
-              <MovieFilter />
+              {location.pathname === '/' && <MovieFilter />}
               <NavItem 
                 to='/login'
                 title='Log In'

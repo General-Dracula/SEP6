@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSearch } from '../context/SearchProvider'
 import api from '../../utils/movieApi'
-import { Input } from '@chakra-ui/react'
+import { Button, Image, Input } from '@chakra-ui/react'
 import { colors } from '../../utils/constants'
 
 const MovieFilter = () => {
@@ -42,7 +42,7 @@ const MovieFilter = () => {
           placeholder="Search..."
           type="search"
           name="filterMovie"
-
+          
           bgColor={colors.card}
           color={colors.text}
           border='none'
@@ -54,6 +54,21 @@ const MovieFilter = () => {
           py='0.5rem'
           overflow='hidden'
         />
+        <Button 
+          ml='-2rem'
+          bg='transparent'
+          border='none'
+          outline='none'
+          _hover={{
+            cursor: 'pointer'
+          }}
+          type='submit'
+        >
+          <Image 
+            src='/glass.png'
+            h='1rem'
+          />
+        </Button>
       </form>
     </header>
   )
