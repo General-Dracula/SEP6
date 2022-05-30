@@ -22,7 +22,6 @@ const Movie = ({ poster_path, title, vote_average, release_date }) => {
       overflow='hidden'
       gridGap='0.5rem'
       mb='1.5rem'
-      fontFamily='sans-serif'
     >
       <Image
         minW='100%'
@@ -38,7 +37,6 @@ const Movie = ({ poster_path, title, vote_average, release_date }) => {
           m='0'
           as='h5' 
           size='md'
-          color={colors.text}
         >
           {title}
         </Heading>

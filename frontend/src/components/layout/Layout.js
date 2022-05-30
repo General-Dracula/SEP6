@@ -9,7 +9,11 @@ const Layout = ({children}) => {
 			flexDir='column'
 			alignItems='center'
 			bgColor={colors.bg}
-			
+			px='10%'
+			pt='1rem'
+			gridGap='2rem'
+			fontFamily='sans-serif'
+			color={colors.text}
 		>
 			{children}
 		</Flex>
