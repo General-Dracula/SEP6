@@ -19,7 +19,7 @@ const MovieDetails = () => {
   }, [movieId])
 
   return (
-    <div className="text-slate-900">
+    <div>
       <img
         src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`}
         alt="movie"
@@ -29,7 +29,9 @@ const MovieDetails = () => {
       <p>Release date:{movie.release_date}</p>
       <p>Runtime (minutes): {movie.runtime}</p>
       <p>Tagline: {movie.tagline}</p>
-      <p>Vote average: {movie.vote_average}</p>
+      <p>
+        Vote average: {movie.vote_average} out of {movie.vote_count} votes
+      </p>
       {cast.map(member => {
         return (
           <div key={member.id}>

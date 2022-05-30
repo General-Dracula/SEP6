@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 
 const Navigation = () => {
   return (
-    <nav className="bg-slate-900">
+    <nav>
       <NavLink to="/login">Log in</NavLink>
     </nav>
   )

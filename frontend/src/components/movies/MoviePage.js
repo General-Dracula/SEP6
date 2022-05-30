@@ -36,7 +36,7 @@ const MoviePage = () => {
   }
 
   return (
-    <div className="flex flex-col mx-8">
+    <div>
       <MovieFilter
         filteredMovie={filteredMovie}
         handleMovieFilter={({ target: { value } }) => {

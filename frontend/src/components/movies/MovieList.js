@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const MovieList = ({ movies }) => {
   return (
-    <div className="flex flex-row flex-wrap justify-between">
+    <div>
       {movies.map(movie => {
         return (
           <Link key={movie.id} to={`/${movie.id}`}>

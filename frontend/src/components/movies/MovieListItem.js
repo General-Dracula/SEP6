@@ -1,28 +1,26 @@
 import React from 'react'
 
-const Movie = ({ poster_path, title, vote_average }) => {
+const Movie = ({ poster_path, title, vote_average, release_date }) => {
   const setVoteColor = () => {
     if (vote_average >= 8) {
       return { color: 'green' }
     } else if (vote_average >= 6) {
-      return { color: 'yellow' }
+      return { color: 'black' }
     } else {
       return { color: 'red' }
     }
   }
 
   return (
-    <div className="w-60 my-2 rounded bg-teal">
+    <div>
       <img
         src={`https://image.tmdb.org/t/p/w342/${poster_path}`}
         alt="movie"
-        className="w-full h-96"
       ></img>
-      <div className="flex justify-between items-center m-1">
-        <h3 className="m-0 self-center">{title}</h3>
-        <span className="bg-slate-800 p-2 rounded-xl" style={setVoteColor()}>
-          {vote_average}
-        </span>
+      <div>
+        <h3>{title}</h3>
+        <span style={setVoteColor()}>{vote_average}</span>
+        <p>{release_date}</p>
       </div>
     </div>
   )
