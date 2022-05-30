@@ -6,7 +6,7 @@ const MovieFilter = ({
   handleMovieSearch,
 }) => {
   return (
-    <header className="bg-teal p-3 rounded">
+    <header className="bg-teal p-3 rounded flex justify-between">
       <form onSubmit={handleMovieSearch}>
         <input
           value={filteredMovie}

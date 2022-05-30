@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import MovieFilter from './MovieFilter'
 import MovieList from './MovieList'
-import api from '../utils/api'
+import api from '../../utils/movieApi'
 
 const MoviePage = () => {
   const [movies, setMovies] = useState([])

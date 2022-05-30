@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Movie = ({ poster_path, title, overview, vote_average }) => {
+const Movie = ({ poster_path, title, vote_average }) => {
   const setVoteColor = () => {
     if (vote_average >= 8) {
       return { color: 'green' }
@@ -14,7 +14,7 @@ const Movie = ({ poster_path, title, overview, vote_average }) => {
   return (
     <div className="w-60 my-2 rounded bg-teal">
       <img
-        src={`https://image.tmdb.org/t/p/w1280/${poster_path}`}
+        src={`https://image.tmdb.org/t/p/w342/${poster_path}`}
         alt="movie"
         className="w-full h-96"
       ></img>

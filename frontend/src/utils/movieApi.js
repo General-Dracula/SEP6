@@ -52,6 +52,22 @@ const getFeaturedMovies = async () => {
   return response.data
 }
 
+const getMovieDetails = async movieId => {
+  const response = await axios.get(`${baseUrl}/3/movie/${movieId}`, {
+    params: { api_key: process.env.REACT_APP_API_KEY },
+  })
+
+  return response.data
+}
+
+const getMovieCredits = async movieId => {
+  const response = await axios.get(`${baseUrl}/3/movie/${movieId}/credits`, {
+    params: { api_key: process.env.REACT_APP_API_KEY },
+  })
+
+  return response.data
+}
+
 const api = {
   getConfig,
   getLatestMovies,
@@ -59,6 +75,8 @@ const api = {
   searchMovie,
   searchByGenre,
   getFeaturedMovies,
+  getMovieDetails,
+  getMovieCredits,
 }
 
 export default api
