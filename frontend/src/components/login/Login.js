@@ -36,19 +36,19 @@ const Login = () => {
 
   return (
     <Flex
-      bgColor={colors.text}
+      bgColor={colors.nav}
       p="3rem"
       flexDir="column"
       alignItems="center"
       borderRadius="1rem"
     >
-      <Heading m="0" mb="2rem" color={colors.textInv}>
+      <Heading m="0" mb="2rem" color={colors.text}>
         LOGIN
       </Heading>
       <form onSubmit={handleLogin}>
         <Flex flexDir="column" gridGap="0.5rem">
           <Box>
-            <Text color={colors.textInv} pl="0.5rem" fontWeight="bold">
+            <Text color={colors.text} pl="0.5rem" fontWeight="bold">
               Email
             </Text>
             <Input
@@ -64,11 +64,12 @@ const Login = () => {
               h="2rem"
               maxW="15rem"
               w="15rem"
+              px="1rem"
               overflow="hidden"
             />
           </Box>
           <Box>
-            <Text pl="0.5rem" color={colors.textInv} fontWeight="bold">
+            <Text pl="0.5rem" color={colors.text} fontWeight="bold">
               Password
             </Text>
             <Input
@@ -84,6 +85,7 @@ const Login = () => {
               h="2rem"
               maxW="15rem"
               w="15rem"
+              px="1rem"
               overflow="hidden"
             />
           </Box>
@@ -106,7 +108,7 @@ const Login = () => {
         </Flex>
       </form>
       <Box mt="0.5rem">
-        <NavLink to="/signup">Don't have an account yet?</NavLink>
+        <NavLink to="/signup" style={{color: colors.text}}>Don't have an account yet?</NavLink>
       </Box>
       <Box>
         <p style={{ color: 'black' }}>{error}</p>

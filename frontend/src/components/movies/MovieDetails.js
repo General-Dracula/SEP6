@@ -53,50 +53,51 @@ const MovieDetails = () => {
       gridGap='2rem'
       mb='3rem'
     >
-    <Flex
-      // alignItems='start'
-      gridGap='2rem'
-    >
-      <Image
-        w='30%'
-        objectFit='contain'
-        src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`}
-        alt="movie"
-        borderRadius='1.5rem'
-      />
       <Flex
-        flexDir='column'
-        w='60%'
-        // gridGap='4rem'
-        justifyContent='center'
+        // alignItems='start'
+        gridGap='2rem'
       >
-      
-
-      <Heading as='h1' fontSize='3rem'>
-        {movie.title}
-      </Heading>
-      <Text
-        fontSize='large'
-      >
-        {movie.overview}
-      </Text>
-      <Box
-        bgColor={colors.details}
-        pb='0.5rem'
-      >
-        {
-          details.map(({key, value}) => (
-            <MovieDetailItem
-              key={key}
-              detailName={key}
-              detailValue={value}
-            />
-          ))
-        }
-      </Box>
+        <Image
+          w='30%'
+          objectFit='contain'
+          src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`}
+          alt="movie"
+          borderRadius='1.5rem'
+        />
+        <Flex
+          flexDir='column'
+          w='60%'
+          // gridGap='4rem'
+          justifyContent='center'
+        >
         
+
+        <Heading as='h1' fontSize='3rem'>
+          {movie.title}
+        </Heading>
+        <Text
+          fontSize='large'
+        >
+          {movie.overview}
+        </Text>
+        <Box
+          bgColor={colors.details}
+          pb='0.5rem'
+        >
+          {
+            details.map(({key, value}) => (
+              <MovieDetailItem
+                key={key}
+                detailName={key}
+                detailValue={value}
+              />
+            ))
+          }
+        </Box>
+          
+        </Flex>
       </Flex>
-    </Flex>
+      <Heading as='h1' m='0'>Actors</Heading>
       <Flex 
         flexWrap='wrap'
         gridGap='1rem'

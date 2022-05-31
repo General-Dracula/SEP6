@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthProvider'
 import passwordStrength from 'pwd-strength'
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { Box, Button, Flex, Heading, Input, Text } from '@chakra-ui/react'
+import { colors } from '../../utils/constants'
 
 const Signup = () => {
   const [email, setEmail] = useState('')
@@ -42,37 +44,88 @@ const Signup = () => {
   }
 
   return (
-    <div>
+    <Flex
+      bgColor={colors.nav}
+      p="3rem"
+      flexDir="column"
+      alignItems="center"
+      borderRadius="1rem"
+    >
+      <Heading m="0" mb="2rem" color={colors.text}>
+        SIGN UP
+      </Heading>
       <form onSubmit={handleSubmit}>
-        <div>
-          Email:
-          <input
-            id="username"
-            type="text"
-            name="Username"
-            value={email}
-            onChange={handleEmailInput}
-          />
-        </div>
-        <div>
-          Password:
-          <input
-            id="password"
-            type="password"
-            name="Password"
-            value={password}
-            onChange={handlePasswordInput}
-          />
-        </div>
-        <button id="loginButton" type="submit">
-          Sign up
-        </button>
+        <Flex flexDir="column" gridGap="0.5rem">
+          <Box>
+            <Text color={colors.text} pl="0.5rem" fontWeight="bold">
+              Email
+            </Text>
+            <Input
+              value={email}
+              onChange={handleEmailInput}
+              id="username"
+              type="text"
+              name="Username"
+              bgColor={colors.card}
+              color={colors.text}
+              border="none"
+              borderRadius="0.5rem"
+              h="2rem"
+              maxW="15rem"
+              w="15rem"
+              px="1rem"
+              overflow="hidden"
+            />
+          </Box>
+          <Box>
+            <Text pl="0.5rem" color={colors.text} fontWeight="bold">
+              Password
+            </Text>
+            <Input             
+              value={password}
+              onChange={handlePasswordInput}
+              id="password"
+              type="password"
+              name="Password"
+              bgColor={colors.card}
+              color={colors.text}
+              border="none"
+              borderRadius="0.5rem"
+              h="2rem"
+              maxW="15rem"
+              w="15rem"
+              px="1rem"
+              overflow="hidden"
+            />
+          </Box>
+            <Text margin='auto'>
+               {pwdReq.success ? 'Password meets the requirements' : pwdReq.message}
+            </Text>
+          <Button
+            id="loginButton"
+            type="submit"
+            border="none"
+            borderRadius="3rem"
+            h="2rem"
+            mt="2rem"
+            bgColor={colors.card}
+            color={colors.text}
+            _hover={{
+              bgColor: colors.bg,
+              cursor: 'pointer',
+            }}
+          >
+            Sign up
+          </Button>
+        </Flex>
       </form>
-      <p>
-        {pwdReq.success ? 'Password meets the requirements' : pwdReq.message}
-      </p>
-      <p>{error}</p>
-    </div>
+      <Box mt="0.5rem">
+        <NavLink to="/login" style={{color: colors.text}}>Log in with account?</NavLink>
+      </Box>
+      <Box>
+        <p style={{ color: 'black' }}>{error}</p>
+      </Box>
+    </Flex>
   )
 }
 

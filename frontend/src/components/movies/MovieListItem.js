@@ -1,4 +1,4 @@
-import { Flex, Heading, Image, Text, Box, Icon } from '@chakra-ui/react'
+import { Flex, Heading, Image, Text, Box } from '@chakra-ui/react'
 import React, { useState, useEffect, useMemo } from 'react'
 import { NavLink } from 'react-router-dom'
 import { colors } from '../../utils/constants'
@@ -12,7 +12,7 @@ const Movie = ({ poster_path, title, vote_average, release_date, id }) => {
 
   useEffect(() => {
     setInFavorites(favMoviesList.filter(movie => movie.id === id).length === 1)
-  }, [favMoviesList])
+  }, [favMoviesList, id])
 
   const handleMouseEnter = () => setIsHovered(true)
   const handleMouseLeave = () => setIsHovered(false)
