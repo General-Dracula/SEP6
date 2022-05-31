@@ -135,7 +135,7 @@ def get_favorite_movies(user_email): #gives a vector of the id of the favorite m
       mydb.close()
       return return_list
 
-def user_visitted_page(): #adds a record to the dbs of a user logging in and deleted logs older than 26 hours
+def user_visited_page(): #adds a record to the dbs of a user logging in and deleted logs older than 26 hours
       mydb = mysql.connector.connect(**dbs_config)
       cursor = mydb.cursor()
       now = datetime.datetime.now()

@@ -6,7 +6,7 @@ app = Flask(__name__, static_url_path='', static_folder='frontend/build')
 
 @app.route("/")
 def main_app():
-  user_visitted_page() #DO NOT COMMENT
+  user_visited_page() #DO NOT COMMENT
   #logs into the database when a user logs in, deletes logs older than 26 hours
   
   #print('Users visited in the last hour: ' + str(get_visit_numbers_last_24hr()))
@@ -62,6 +62,14 @@ def get_fav():
   data = request.json
   email = data['email']
   response = get_favorite_movies(email)
+  return jsonify(response)
+
+@app.route('/stats', methods=['GET'])
+def get_number_visited_last_24():
+  nr_visitors_last_24 = get_visit_numbers_last_24hr()
+  response = {
+    'nr_visitors': nr_visitors_last_24
+  }
   return jsonify(response)
 
 if __name__ == '__main__':

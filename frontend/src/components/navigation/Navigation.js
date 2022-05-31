@@ -1,8 +1,10 @@
-import { Box, Flex, Image } from '@chakra-ui/react'
-import React from 'react'
+import { Box, Flex, Image, Text } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { colors } from '../../utils/constants'
+import { getNrUserLast24 } from '../../utils/statsApi'
 import { useAuth } from '../context/AuthProvider'
+import { useStats } from '../context/StatsProvider'
 import MovieFilter from '../movies/MovieFilter'
 import NavItem from './NavItem'
 
@@ -10,12 +12,21 @@ const Navigation = () => {
   const { user, onLogout } = useAuth()
   const location = useLocation()
 
+  const { nrVisitors } = useStats() 
+
   return (
-    <Box bgColor={colors.nav} w="100%" p="1rem" borderRadius="0.5rem">
+    <Flex 
+      bgColor={colors.nav} 
+      w="100%" 
+      px="1rem"
+      pt='1rem' 
+      borderRadius="0.5rem" 
+      flexDir='column'
+    >
       <nav>
         <Flex>
           <NavLink to={'/'}>
-            <Image h="4rem" src="/moviecult_logo.png" />
+            <Image h="4rem" src="/moviecult_logo.png"/>
           </NavLink>
           <Flex
             w="100%"
@@ -40,7 +51,12 @@ const Navigation = () => {
           </Flex>
         </Flex>
       </nav>
-    </Box>
+      <Flex justifyContent='end' pb='0.5rem'>
+        <Text m='0' fontSize='smaller' fontStyle='italic'>
+          Visits in the last 24 hours: {nrVisitors} 
+        </Text>
+      </Flex>
+    </Flex>
   )
 }
 

@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import MovieList from './MovieList'
 import { useSearch } from '../context/SearchProvider'
 import api from '../../utils/movieApi'
-import { Heading } from '@chakra-ui/react'
+import { Flex, Heading } from '@chakra-ui/react'
+import CategoryContainer from '../categories/CategoryContainer'
 
 const MoviePage = () => {
   const { 
@@ -26,14 +27,26 @@ const MoviePage = () => {
     return () => document.title = 'MovieCult'
   }, [])
 
-  return movies.length > 0 ?
-    (
-      <MovieList movies={movies} />
-    )
-  :
-    <Heading as='h1'>
-      No movies found...
-    </Heading>
+  const moviePart = useMemo(() => {
+
+    return movies.length > 0 ?
+        (
+          <MovieList movies={movies} />
+        )
+      :
+        <Heading as='h1'>
+          No movies found...
+        </Heading>
+  }, [movies]) 
+
+  return (
+    <>
+      {moviePart}
+      <CategoryContainer />
+    </>
+  )
+
+
 }
 
 export default MoviePage
