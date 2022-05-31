@@ -1,18 +1,18 @@
-import { Flex, Heading, Image, Text, Box } from '@chakra-ui/react'
-import React, { useState, useEffect } from 'react'
+import { Flex, Heading, Image, Text, Box, Icon } from '@chakra-ui/react'
+import React, { useState, useEffect, useMemo } from 'react'
+import { NavLink } from 'react-router-dom'
 import { colors } from '../../utils/constants'
 import { trimDate } from '../../utils/helpers'
-import userApi from '../../utils/userApi'
 import { useAuth } from '../context/AuthProvider'
 
 const Movie = ({ poster_path, title, vote_average, release_date, id }) => {
   const [isHovered, setIsHovered] = useState(false)
-  const [hoverText, setHoverText] = useState('')
-  const { user, savedEmail } = useAuth()
+  const [inFavorites, setInFavorites] = useState(false)
+  const { user,  addMovieToFavorites, removeMovieFromFavorites, favMoviesList } = useAuth()
 
   useEffect(() => {
-    user ? setHoverText('F') : setHoverText('Log in to favorite')
-  }, [user])
+    setInFavorites(favMoviesList.filter(movie => movie.id === id).length === 1)
+  }, [favMoviesList])
 
   const handleMouseEnter = () => setIsHovered(true)
   const handleMouseLeave = () => setIsHovered(false)
@@ -20,12 +20,38 @@ const Movie = ({ poster_path, title, vote_average, release_date, id }) => {
   const onFavoriteClick = async event => {
     event.preventDefault()
     if (user) {
-      const success = await userApi.addToFav(savedEmail, id)
-      success
-        ? setHoverText('Movie added')
-        : setHoverText('Already in favorites')
+      if(inFavorites) {
+        removeMovieFromFavorites(id)
+        setInFavorites(favMoviesList.filter(movie => movie.id === id).length === 1)
+      } else {
+        addMovieToFavorites(id)
+        setInFavorites(favMoviesList.filter(movie => movie.id === id).length === 1)
+      }
     }
   }
+
+  const hoverElement = useMemo(() => {
+    if(user) {
+      if(inFavorites) {
+        return <Image
+          boxSize='1rem' 
+          src='/filled_star.png'
+        />
+      } else {
+        return <Image
+          boxSize='1rem' 
+          src='/empty_star.png'
+        />
+      }
+    } else {
+      return <NavLink to={'/login'}>
+        <Image
+          boxSize='1rem' 
+          src='/empty_star.png'
+        />
+      </NavLink>
+    }
+  }, [user, inFavorites])
 
   const setVoteColor = () => {
     if (vote_average >= 8) {
@@ -59,7 +85,7 @@ const Movie = ({ poster_path, title, vote_average, release_date, id }) => {
           borderRadius="0.5rem"
           onClick={onFavoriteClick}
         >
-          {hoverText}
+          {hoverElement}
         </Box>
       )}
       <Box

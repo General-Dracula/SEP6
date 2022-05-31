@@ -91,7 +91,6 @@ def delete_favorite_movie(movie_id, user_email): #deletes favorite movie
       cursor.execute(SQL_delete_fav_mov, (int(movie_id), get_user_id(user_email)))
       mydb.commit()
       mydb.close()
-      print('Fav movie deleted')
       return
       
 
@@ -114,7 +113,7 @@ def add_favorite_movie(movie_id, user_email): #returns false if movie allready a
       rows = cursor.fetchall()  
       for row in rows:
             mydb.close()
-            print('Movie allready favorite')
+            print('Movie already favorite')
             return False
       
       SQL_add_user = "INSERT INTO FavoriteMovies (MovieId, UserId) VALUES (%s, %s)"

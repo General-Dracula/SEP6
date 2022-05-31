@@ -18,12 +18,19 @@ const addToFav = async (email, movieId) => {
   return response.data
 }
 
+const removeFromFav = async (email, movieId) => {
+  // adding an explicit header because axios.delete does not work as axios.post
+  const response = await axios.delete('/favorite', { data: { email, movieId }, headers: { 'Content-Type': 'application/json'} })
+
+  return response.data
+}
+
 const getFavs = async email => {
   const response = await axios.post('/favorite/list', { email })
 
   return response.data
 }
 
-const api = { signupUser, loginUser, addToFav, getFavs }
+const api = { signupUser, loginUser, addToFav, getFavs, removeFromFav }
 
 export default api

@@ -49,6 +49,14 @@ def add_to_fav():
   response = add_favorite_movie(movie_id, email)
   return jsonify(response)
 
+@app.route('/favorite', methods=['DELETE'])
+def remove_from_fav():
+  data = request.json
+  email = data['email']
+  movie_id = data['movieId']
+  response = delete_favorite_movie(movie_id, email)
+  return jsonify(response)
+
 @app.route('/favorite/list', methods=['POST'])
 def get_fav():
   data = request.json

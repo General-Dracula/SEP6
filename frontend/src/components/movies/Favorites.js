@@ -9,6 +9,12 @@ const Favorites = () => {
   const [favMoviesList, setFavMoviesList] = useState([])
   const { savedEmail } = useAuth()
 
+  const fetchMovie = async movieId => {
+    const fetchedMovie = await movieApi.getMovieDetails(movieId)
+
+    return fetchedMovie
+  }
+
   useEffect(() => {
     const fetchFavs = async () => {
       const fetchedMoviesId = await userApi.getFavs(savedEmail)
@@ -25,11 +31,6 @@ const Favorites = () => {
     fetchFavs().catch(error => console.log(error))
   }, [savedEmail])
 
-  const fetchMovie = async movieId => {
-    const fetchedMovie = await movieApi.getMovieDetails(movieId)
-
-    return fetchedMovie
-  }
 
   return (
     <div>
