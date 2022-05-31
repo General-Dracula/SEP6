@@ -17,6 +17,11 @@ const Favorites = () => {
   }
 
   useEffect(() => {
+    document.title = 'Favorites | MovieCult'
+    return () => document.title = 'MovieCult'
+  }, [])
+
+  useEffect(() => {
     const fetchFavs = async () => {
       const fetchedMoviesId = await userApi.getFavs(savedEmail)
 

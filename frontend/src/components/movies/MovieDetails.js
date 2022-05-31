@@ -25,6 +25,11 @@ const MovieDetails = () => {
   }
 
   useEffect(() => {
+    document.title = movie.title
+    return () => document.title = 'MovieCult'
+  }, [movie])
+
+  useEffect(() => {
     setDetails([
       {
         key: 'Release date',

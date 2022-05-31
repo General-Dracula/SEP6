@@ -21,7 +21,11 @@ const MoviePage = () => {
     discoverMovies().catch(error => console.log(error))
   }, [setMovies])
 
-  
+  useEffect(() => {
+    document.title = 'Home | MovieCult'
+    return () => document.title = 'MovieCult'
+  }, [])
+
   return movies.length > 0 ?
     (
       <MovieList movies={movies} />
