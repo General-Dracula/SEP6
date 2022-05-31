@@ -1,5 +1,5 @@
 from pickle import FALSE, TRUE
-from flask import Flask, send_from_directory
+from flask import Flask, request, jsonify, send_from_directory
 from database_connection import *
 
 app = Flask(__name__, static_url_path='', static_folder='frontend/build')
@@ -24,6 +24,37 @@ def main_app():
   #  print("------False password or not made")
     
   return send_from_directory(app.static_folder, 'index.html')
+
+@app.route('/signup', methods=['POST'])
+def signup_user():
+  data = request.json
+  email = data['email']
+  pwd = data['password']
+  response = add_user(email, pwd)
+  return jsonify(response)
+
+@app.route('/login', methods=['POST'])
+def login_user():
+  data = request.json
+  email = data['email']
+  pwd = data['password']
+  response = check_password(email, pwd)
+  return jsonify(response)
+
+@app.route('/favorite', methods=['POST'])
+def add_to_fav():
+  data = request.json
+  email = data['email']
+  movie_id = data['movieId']
+  response = add_favorite_movie(movie_id, email)
+  return jsonify(response)
+
+@app.route('/favorite/list', methods=['POST'])
+def get_fav():
+  data = request.json
+  email = data['email']
+  response = get_favorite_movies(email)
+  return jsonify(response)
 
 if __name__ == '__main__':
   app.run(host='127.0.0.1', port=8080, debug=True)

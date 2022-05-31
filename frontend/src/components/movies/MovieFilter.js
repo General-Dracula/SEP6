@@ -5,7 +5,6 @@ import { Button, Image, Input } from '@chakra-ui/react'
 import { colors } from '../../utils/constants'
 
 const MovieFilter = () => {
-  
   const {
     searchText: filteredMovie, 
     setSearchText: setFilteredMovie,

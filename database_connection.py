@@ -18,7 +18,7 @@ def random_char(char_num):
      
 def add_user(char_email, char_password): #return false if user allready created or the email is invalid
       check_data = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
-      if(re.search(check_data, char_email)): #check email
+      if(not re.search(check_data, char_email)): #check email
             print("Invalid email")
             return False
       mydb = mysql.connector.connect(**dbs_config) #connect to database with the predefined config
@@ -36,7 +36,7 @@ def add_user(char_email, char_password): #return false if user allready created 
       cursor.execute(SQL_add_user, data_user) #add the new user to the dbs
       mydb.commit() #commit the data to the dbs
       mydb.close() #close the dbs connection
-      return
+      return True
     
 def check_password(email, password): #returns true or false
       mydb = mysql.connector.connect(**dbs_config)
@@ -122,7 +122,7 @@ def add_favorite_movie(movie_id, user_email): #returns false if movie allready a
       cursor.execute(SQL_add_user, favMovData)
       mydb.commit()
       mydb.close()  
-      return
+      return True
       
 def get_favorite_movies(user_email): #gives a vector of the id of the favorite movies of a user 
       mydb = mysql.connector.connect(**dbs_config)
