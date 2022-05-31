@@ -41,6 +41,7 @@ const Login = () => {
       flexDir="column"
       alignItems="center"
       borderRadius="1rem"
+      my='auto'
     >
       <Heading m="0" mb="2rem" color={colors.text}>
         LOGIN

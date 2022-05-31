@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthProvider'
 import movieApi from '../../utils/movieApi'
 import userApi from '../../utils/userApi'
 import { Link } from 'react-router-dom'
+import { Flex, Heading } from '@chakra-ui/react'
 
 const Favorites = () => {
   const [favMoviesList, setFavMoviesList] = useState([])
@@ -33,20 +34,25 @@ const Favorites = () => {
 
 
   return (
-    <div>
-      <h1>Favorites:</h1>
-      {favMoviesList.map(movie => {
-        return (
-          <Link
-            key={movie.id}
-            to={`/${movie.id}`}
-            style={{ textDecoration: 'none' }}
-          >
-            <MovieListItem {...movie} />
-          </Link>
-        )
-      })}
-    </div>
+    <Flex 
+      flexDir='column'
+      w='100%'
+    >
+      <Heading as='h1'>Favorites:</Heading>
+      <Flex flexWrap='wrap' gridGap='3rem'>
+        {favMoviesList.map(movie => {
+          return (
+            <Link
+              key={movie.id}
+              to={`/${movie.id}`}
+              style={{ textDecoration: 'none' }}
+            >
+              <MovieListItem {...movie} />
+            </Link>
+          )
+        })}
+      </Flex>
+    </Flex>
   )
 }
 

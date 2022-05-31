@@ -15,6 +15,7 @@ const Layout = ({children}) => {
 			gridGap='2rem'
 			fontFamily='sans-serif'
 			color={colors.text}
+			minH='calc(100vh - 4rem)'
 		>
 			{children}
 		</Flex>

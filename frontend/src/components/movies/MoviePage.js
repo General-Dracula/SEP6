@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import MovieList from './MovieList'
 import { useSearch } from '../context/SearchProvider'
 import api from '../../utils/movieApi'
+import { Heading } from '@chakra-ui/react'
 
 const MoviePage = () => {
   const { 
@@ -21,10 +22,14 @@ const MoviePage = () => {
   }, [setMovies])
 
   
-
-  return (
-    <MovieList movies={movies} />
-  )
+  return movies.length > 0 ?
+    (
+      <MovieList movies={movies} />
+    )
+  :
+    <Heading as='h1'>
+      No movies found...
+    </Heading>
 }
 
 export default MoviePage

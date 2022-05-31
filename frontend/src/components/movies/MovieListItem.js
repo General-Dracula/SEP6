@@ -1,5 +1,5 @@
 import { Flex, Heading, Image, Text, Box } from '@chakra-ui/react'
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useMemo } from 'react'
 import { NavLink } from 'react-router-dom'
 import { colors } from '../../utils/constants'
 import { trimDate } from '../../utils/helpers'
@@ -7,12 +7,7 @@ import { useAuth } from '../context/AuthProvider'
 
 const Movie = ({ poster_path, title, vote_average, release_date, id }) => {
   const [isHovered, setIsHovered] = useState(false)
-  const [inFavorites, setInFavorites] = useState(false)
-  const { user,  addMovieToFavorites, removeMovieFromFavorites, favMoviesList } = useAuth()
-
-  useEffect(() => {
-    setInFavorites(favMoviesList.filter(movie => movie.id === id).length === 1)
-  }, [favMoviesList, id])
+  const { user,  addMovieToFavorites, removeMovieFromFavorites, isMovieInFav } = useAuth()
 
   const handleMouseEnter = () => setIsHovered(true)
   const handleMouseLeave = () => setIsHovered(false)
@@ -20,19 +15,17 @@ const Movie = ({ poster_path, title, vote_average, release_date, id }) => {
   const onFavoriteClick = async event => {
     event.preventDefault()
     if (user) {
-      if(inFavorites) {
+      if(isMovieInFav(id)) {
         removeMovieFromFavorites(id)
-        setInFavorites(favMoviesList.filter(movie => movie.id === id).length === 1)
       } else {
         addMovieToFavorites(id)
-        setInFavorites(favMoviesList.filter(movie => movie.id === id).length === 1)
       }
     }
   }
 
   const hoverElement = useMemo(() => {
     if(user) {
-      if(inFavorites) {
+      if(isMovieInFav(id)) {
         return <Image
           boxSize='1rem' 
           src='/filled_star.png'
@@ -51,7 +44,7 @@ const Movie = ({ poster_path, title, vote_average, release_date, id }) => {
         />
       </NavLink>
     }
-  }, [user, inFavorites])
+  }, [user, isMovieInFav, id])
 
   const setVoteColor = () => {
     if (vote_average >= 8) {
@@ -94,21 +87,37 @@ const Movie = ({ poster_path, title, vote_average, release_date, id }) => {
         overflow='hidden'
         borderRadius="1rem"
       >
-
+        {poster_path ?
+          <Image
+            w='13rem'
+            borderRadius="1rem"
+            src={`https://image.tmdb.org/t/p/w342/${poster_path}`}
+            alt={title}
+            transitionDuration="0.3s"
+            {...(isHovered
+              ? {
+                  transform: 'scale(1.05)',
+                  filter: 'auto',
+                  blur: '2px',
+                }
+              : {})}
+          />
+        :
         <Image
-          w='13rem'
-          borderRadius="1rem"
-          src={`https://image.tmdb.org/t/p/w342/${poster_path}`}
-          alt={title}
-          transitionDuration="0.3s"
-          {...(isHovered
-            ? {
-                transform: 'scale(1.05)',
-                filter: 'auto',
-                blur: '2px',
-              }
-            : {})}
-        />
+        w='13rem'
+        borderRadius="1rem"
+        src='/movie_placeholder.png'
+        alt={title}
+        transitionDuration="0.3s"
+        {...(isHovered
+          ? {
+              transform: 'scale(1.05)',
+              filter: 'auto',
+              blur: '2px',
+            }
+          : {})}
+      />
+        }
       </Box>
       <Box px="0.5rem" pb="0.3rem">
         <Heading 

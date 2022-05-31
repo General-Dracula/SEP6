@@ -1,16 +1,28 @@
 import React, { useState, useEffect } from 'react'
 import movieApi from '../../utils/movieApi'
-import { useParams } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 import { Box, Flex, Heading, Image, Text } from '@chakra-ui/react'
 import MovieDetailItem from './MovieDetailItem'
 import ActorCard from './ActorCard'
 import { colors } from '../../utils/constants'
+import { useAuth } from '../context/AuthProvider'
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState({})
   const [cast, setCast] = useState([])
 
   const [details, setDetails] = useState([])
+  const { isMovieInFav, addMovieToFavorites, removeMovieFromFavorites, user } = useAuth()
+  const movieId = Number(useParams().movieId)
+
+  const handleStarClick = () => {
+    
+    if(isMovieInFav(movieId)) {
+      removeMovieFromFavorites(movieId)
+    } else {
+      addMovieToFavorites(movieId)
+    }
+  }
 
   useEffect(() => {
     setDetails([
@@ -34,7 +46,6 @@ const MovieDetails = () => {
   }, [movie])
 
 
-  let { movieId } = useParams()
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -71,10 +82,40 @@ const MovieDetails = () => {
           justifyContent='center'
         >
         
-
-        <Heading as='h1' fontSize='3rem'>
-          {movie.title}
-        </Heading>
+        <Flex
+          gridGap='2rem'
+          alignItems='center'
+        >
+          <Heading as='h1' fontSize='3rem'>
+            {movie.title}
+          </Heading>
+          <Box
+            p='0.5rem'
+            transitionDuration='0.3s'
+            borderRadius='1rem'
+            _hover={{
+              bgColor: colors.card,
+            }}
+          >
+            {user ?
+              <Image 
+                boxSize='3rem'
+                src={isMovieInFav(movieId) ? '/filled_star.png' : '/empty_star.png'}
+                onClick={handleStarClick}
+                cursor='pointer'
+              />
+            :
+              <NavLink to='/login'>
+                <Image 
+                  boxSize='3rem'
+                  src='/empty_star.png'
+                  onClick={handleStarClick}
+                  cursor='pointer'
+                />
+              </NavLink>
+            }
+          </Box>
+        </Flex>
         <Text
           fontSize='large'
         >

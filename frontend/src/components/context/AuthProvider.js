@@ -68,6 +68,9 @@ const AuthProvider = ({ children }) => {
     }
   }
 
+  const isMovieInFav = movieId => favMoviesList.filter(movie => movie.id === movieId).length === 1
+
+
   const loginData = {
     user,
     savedEmail,
@@ -77,6 +80,7 @@ const AuthProvider = ({ children }) => {
     addMovieToFavorites,
     removeMovieFromFavorites,
     favMoviesList,
+    isMovieInFav,
   }
 
   return (
