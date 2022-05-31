@@ -5,4 +5,5 @@ export const colors = {
 	nav: '#30344a',
 	card: '#000000CC',
 	details: '#4a4a4a',
+	hoverText: '#4287f5',
 }

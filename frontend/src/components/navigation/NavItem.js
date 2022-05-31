@@ -16,6 +16,10 @@ const NavItem = ({to, title, ...props}) => {
 				<Text
 					m='0'
 					fontSize='large'
+					transitionDuration = '0.5s'
+					_hover={{
+						color: colors.hoverText
+					}}
 				>
 					{title}
 				</Text>

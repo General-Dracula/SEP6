@@ -46,6 +46,7 @@ const Movie = ({ poster_path, title, vote_average, release_date, id }) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       pos="relative"
+      borderRadius="1rem"
     >
       {isHovered && (
         <Box
@@ -61,26 +62,43 @@ const Movie = ({ poster_path, title, vote_average, release_date, id }) => {
           {hoverText}
         </Box>
       )}
-
-      <Image
-        minW="100%"
+      <Box
+        pos='relative'
+        h='20rem'
+        overflow='hidden'
         borderRadius="1rem"
-        src={`https://image.tmdb.org/t/p/w342/${poster_path}`}
-        alt={title}
+      >
+
+        <Image
+          w='13rem'
+          borderRadius="1rem"
+          src={`https://image.tmdb.org/t/p/w342/${poster_path}`}
+          alt={title}
+          transitionDuration="0.3s"
+          {...(isHovered
+            ? {
+                transform: 'scale(1.05)',
+                filter: 'auto',
+                blur: '2px',
+              }
+            : {})}
+        />
+      </Box>
+      <Box px="0.5rem" pb="0.3rem">
+        <Heading 
+        m="0" 
+        as="h3" 
         transitionDuration="0.3s"
+        color={colors.text}
         {...(isHovered
           ? {
-              filter: 'auto',
-              blur: '2px',
+              color: colors.hoverText
             }
           : {})}
-      />
-      <Box px="0.5rem" pb="0.3rem">
-        <Heading m="0" as="h3" color={colors.text}>
+        >
           {title}
         </Heading>
         <Flex
-          // bgColor='yellow'
           justifyContent="space-between"
           alignItems="center"
           mt="0.3rem"
