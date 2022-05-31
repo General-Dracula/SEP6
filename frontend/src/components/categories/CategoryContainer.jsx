@@ -1,8 +1,6 @@
 import { Flex, Heading } from "@chakra-ui/react"
 import { categories } from "../../utils/constants"
 import CategoryCard from "./CategoryCard"
-import movieApi from '../../utils/movieApi'
-import { useEffect, useState } from "react"
 
 const CategoryContainer = () => {
 

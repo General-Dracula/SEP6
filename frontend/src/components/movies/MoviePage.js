@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react'
 import MovieList from './MovieList'
 import { useSearch } from '../context/SearchProvider'
 import api from '../../utils/movieApi'
-import { Flex, Heading } from '@chakra-ui/react'
+import { Heading } from '@chakra-ui/react'
 import CategoryContainer from '../categories/CategoryContainer'
 
 const MoviePage = () => {
