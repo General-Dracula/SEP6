@@ -10,11 +10,13 @@ const SearchProvider = ({ children }) => {
     searchText,
     setSearchText,
     movies,
-    setMovies
+    setMovies,
   }
 
   return (
-    <SearchContext.Provider value={searchData}>{children}</SearchContext.Provider>
+    <SearchContext.Provider value={searchData}>
+      {children}
+    </SearchContext.Provider>
   )
 }
 
@@ -23,4 +25,4 @@ export default SearchProvider
 // Helper hook to access search info easier
 export const useSearch = () => {
   return useContext(SearchContext)
-} 
+}

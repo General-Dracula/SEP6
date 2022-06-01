@@ -4,27 +4,28 @@ import { colors } from '../../utils/constants'
 import { useAuth } from '../context/AuthProvider'
 import { useStats } from '../context/StatsProvider'
 import MovieFilter from '../movies/MovieFilter'
+import MovieSort from '../movies/MovieSort'
 import NavItem from './NavItem'
 
 const Navigation = () => {
   const { user, onLogout } = useAuth()
   const location = useLocation()
 
-  const { nrVisitors } = useStats() 
+  const { nrVisitors } = useStats()
 
   return (
-    <Flex 
-      bgColor={colors.nav} 
-      w="100%" 
+    <Flex
+      bgColor={colors.nav}
+      w="100%"
       px="1rem"
-      pt='1rem' 
-      borderRadius="0.5rem" 
-      flexDir='column'
+      pt="1rem"
+      borderRadius="0.5rem"
+      flexDir="column"
     >
       <nav>
         <Flex>
           <NavLink to={'/'}>
-            <Image h="4rem" src="/moviecult_logo.png"/>
+            <Image h="4rem" src="/moviecult_logo.png" />
           </NavLink>
           <Flex
             w="100%"
@@ -37,6 +38,7 @@ const Navigation = () => {
               <NavItem to={user ? '/favorites' : 'login'} title="Favorites" />
             </Flex>
             <Flex gridGap="2rem" mr="2rem" alignItems="center">
+              {location.pathname === '/' && <MovieSort />}
               {location.pathname === '/' && <MovieFilter />}
               {user ? (
                 <NavItem to="/" title="Log out" onClick={() => onLogout()}>
@@ -49,9 +51,9 @@ const Navigation = () => {
           </Flex>
         </Flex>
       </nav>
-      <Flex justifyContent='end' pb='0.5rem'>
-        <Text m='0' fontSize='smaller' fontStyle='italic'>
-          Visits in the last 24 hours: {nrVisitors} 
+      <Flex justifyContent="end" pb="0.5rem">
+        <Text m="0" fontSize="smaller" fontStyle="italic">
+          Visits in the last 24 hours: {nrVisitors}
         </Text>
       </Flex>
     </Flex>
