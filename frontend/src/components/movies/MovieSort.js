@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Select } from '@chakra-ui/react'
 import { colors, sortCategories } from '../../utils/constants'
 import { useSort } from '../context/SortProvider'
